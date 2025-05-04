@@ -43,22 +43,22 @@
 #include "luma_config.h"
 
 Menu rosalinaMenu = {
-    "Rosalina menu",
+    "Rosalina Menü",
     {
-        { "Take screenshot", METHOD, .method = &RosalinaMenu_TakeScreenshot },
-        { "Screen filters...", MENU, .menu = &screenFiltersMenu },
+        { "Screenshot erstellen", METHOD, .method = &RosalinaMenu_TakeScreenshot },
+        { "Bildschirmfilter...", MENU, .menu = &screenFiltersMenu },
         { "Cheats...", METHOD, .method = &RosalinaMenu_Cheats },
-        { "", METHOD, .method = PluginLoader__MenuCallback},
+        { "Plugin Menü", METHOD, .method = PluginLoader__MenuCallback},
         { "New 3DS Menü...", MENU, .menu = &N3DSMenu, .visibility = &menuCheckN3ds },
-        { "Process list", METHOD, .method = &RosalinaMenu_ProcessList },
-        { "Debugger options...", MENU, .menu = &debuggerMenu },
-        { "System configuration...", MENU, .menu = &sysconfigMenu },
+        { "Prozessliste", METHOD, .method = &RosalinaMenu_ProcessList },
+        { "Debugger Einstellungen...", MENU, .menu = &debuggerMenu },
+        { "System Konfiguration...", MENU, .menu = &sysconfigMenu },
         { "Miscellaneous options...", MENU, .menu = &miscellaneousMenu },
-        { "Save settings", METHOD, .method = &RosalinaMenu_SaveSettings },
-        { "Power off / reboot", METHOD, .method = &RosalinaMenu_PowerOffOrReboot },
-        { "System info", METHOD, .method = &RosalinaMenu_ShowSystemInfo },
+        { "Speicherdaten Einstellungen", METHOD, .method = &RosalinaMenu_SaveSettings },
+        { "Herunterfahren/Neustart", METHOD, .method = &RosalinaMenu_PowerOffOrReboot },
+        { "System Informationen", METHOD, .method = &RosalinaMenu_ShowSystemInfo },
         { "Credits", METHOD, .method = &RosalinaMenu_ShowCredits },
-        { "Debug info", METHOD, .method = &RosalinaMenu_ShowDebugInfo, .visibility = &rosalinaMenuShouldShowDebugInfo },
+        { "Debug Informationen", METHOD, .method = &RosalinaMenu_ShowDebugInfo, .visibility = &rosalinaMenuShouldShowDebugInfo },
         {},
     }
 };
@@ -104,7 +104,7 @@ void RosalinaMenu_PowerOffOrReboot(void)
     do
     {
         Draw_Lock();
-        Draw_DrawString(10, 10, COLOR_TITLE, "Power Off / Reboot");
+        Draw_DrawString(10, 10, COLOR_TITLE, "Herunterfahren/Neustarten");
         Draw_DrawString(10, 30, COLOR_WHITE, "Press A to power off.\nPress Y to reboot.\nPress B to go back.");
         Draw_FlushFramebuffer();
         Draw_Unlock();
