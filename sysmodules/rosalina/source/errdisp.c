@@ -141,7 +141,7 @@ static int ERRF_FormatRegisterDump(char *out, const ERRF_ExceptionData *exceptio
 static int ERRF_FormatGenericInfo(char *out, const ERRF_FatalErrInfo *info)
 {
     static const char *types[] = {
-        "generic", "corrupted", "card removed", "exception", "result failure", "generic (log only)", "invalid"
+        "generic", "corrupted", "Karte entfernt", "exception", "result failure", "generic (log only)", "invalid"
     };
 
     static const char *exceptionTypes[] = {
@@ -201,12 +201,12 @@ static int ERRF_FormatError(char *out, const ERRF_FatalErrInfo *info, bool isLog
     switch (info->type)
     {
         case ERRF_ERRTYPE_NAND_DAMAGED:
-            out += sprintf(out, "The NAND chip has been damaged.\n");
+            out += sprintf(out, "Der NAND-Chip ist beschädigt.\n");
             break;
         case ERRF_ERRTYPE_CARD_REMOVED:
         {
-            const char *medium = R_MODULE(info->resCode) == RM_SDMC ? "SD card" : "cartridge";
-            out += sprintf(out, "The %s was removed.\n", medium);
+            const char *medium = R_MODULE(info->resCode) == RM_SDMC ? "SD Karte" : "3DS Karte";
+            out += sprintf(out, "The %s wurde entfernt.\n", medium);
             break;
         }
         case ERRF_ERRTYPE_GENERIC:
