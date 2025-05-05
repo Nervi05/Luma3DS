@@ -53,8 +53,8 @@ Menu rosalinaMenu = {
         { "Prozessliste", METHOD, .method = &RosalinaMenu_ProcessList },
         { "Debugger Einstellungen...", MENU, .menu = &debuggerMenu },
         { "System Konfiguration...", MENU, .menu = &sysconfigMenu },
-        { "Miscellaneous options...", MENU, .menu = &miscellaneousMenu },
-        { "Speicherdaten Einstellungen", METHOD, .method = &RosalinaMenu_SaveSettings },
+        { "Andere Einstellungen...", MENU, .menu = &miscellaneousMenu },
+        { "Einstellungen speichern", METHOD, .method = &RosalinaMenu_SaveSettings },
         { "Herunterfahren/Neustart", METHOD, .method = &RosalinaMenu_PowerOffOrReboot },
         { "System Informationen", METHOD, .method = &RosalinaMenu_ShowSystemInfo },
         { "Credits", METHOD, .method = &RosalinaMenu_ShowCredits },
@@ -83,11 +83,11 @@ void RosalinaMenu_SaveSettings(void)
     do
     {
         Draw_Lock();
-        Draw_DrawString(10, 10, COLOR_TITLE, "Save settings");
+        Draw_DrawString(10, 10, COLOR_TITLE, "Einstellungen speichern");
         if(R_SUCCEEDED(res))
-            Draw_DrawString(10, 30, COLOR_WHITE, "Operation succeeded.");
+            Draw_DrawString(10, 30, COLOR_WHITE, "Vorgang erfolgreich!");
         else
-            Draw_DrawFormattedString(10, 30, COLOR_WHITE, "Operation failed (0x%08lx).", res);
+            Draw_DrawFormattedString(10, 30, COLOR_WHITE, "Vorgang fehlgeschlagen (0x%08lx).", res);
         Draw_FlushFramebuffer();
         Draw_Unlock();
     }
@@ -105,7 +105,7 @@ void RosalinaMenu_PowerOffOrReboot(void)
     {
         Draw_Lock();
         Draw_DrawString(10, 10, COLOR_TITLE, "Herunterfahren/Neustarten");
-        Draw_DrawString(10, 30, COLOR_WHITE, "Press A to power off.\nPress Y to reboot.\nPress B to go back.");
+        Draw_DrawString(10, 30, COLOR_WHITE, "Drücke A zum herunterfahren.\nDrücke Y um Neuzustarten.\nDrücke B um zum Hauptmenü zurückzugehen.");
         Draw_FlushFramebuffer();
         Draw_Unlock();
 
@@ -137,22 +137,22 @@ void RosalinaMenu_ShowSystemInfo(void)
     do
     {
         Draw_Lock();
-        Draw_DrawString(10, 10, COLOR_TITLE, "Rosalina -- System info");
+        Draw_DrawString(10, 10, COLOR_TITLE, "Rosalina -- System Informationen");
 
         u32 posY = 30;
 
         if (areScreenTypesInitialized)
         {
-            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Top screen type:    %s\n", topScreenType);
-            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Bottom screen type: %s\n\n", bottomScreenType);
+            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Oberer Bildschirm Typ:    %s\n", topScreenType);
+            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Unterer Bildschirm Typ:   %s\n\n", bottomScreenType);
         }
 
-        posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Kernel version:     %lu.%lu-%lu\n\n", GET_VERSION_MAJOR(kver), GET_VERSION_MINOR(kver), GET_VERSION_REVISION(kver));
+        posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Kernel Version:     %lu.%lu-%lu\n\n", GET_VERSION_MAJOR(kver), GET_VERSION_MINOR(kver), GET_VERSION_REVISION(kver));
         if (mcuFwVersion != 0 && mcuInfoTableRead)
         {
-            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "MCU FW version:     %lu.%lu\n", GET_VERSION_MAJOR(mcuFwVersion), GET_VERSION_MINOR(mcuFwVersion));
-            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "PMIC vendor:        %hhu\n", mcuInfoTable[1]);
-            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Battery vendor:     %hhu\n\n", mcuInfoTable[2]);
+            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "MCU FW Version:     %lu.%lu\n", GET_VERSION_MAJOR(mcuFwVersion), GET_VERSION_MINOR(mcuFwVersion));
+            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "PMIC Vendor:        %hhu\n", mcuInfoTable[1]);
+            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Battery Vendor:     %hhu\n\n", mcuInfoTable[2]);
         }
 
         Draw_FlushFramebuffer();
@@ -181,7 +181,7 @@ void RosalinaMenu_ShowDebugInfo(void)
     do
     {
         Draw_Lock();
-        Draw_DrawString(10, 10, COLOR_TITLE, "Rosalina -- Debug info");
+        Draw_DrawString(10, 10, COLOR_TITLE, "Rosalina -- Debug Informationen");
 
         u32 posY = 30;
 
@@ -227,20 +227,21 @@ void RosalinaMenu_ShowCredits(void)
         Draw_Lock();
         Draw_DrawString(10, 10, COLOR_TITLE, "Rosalina -- Luma3DS credits");
 
-        u32 posY = Draw_DrawString(10, 30, COLOR_WHITE, "Luma3DS (c) 2016-2024 AuroraWright, TuxSH") + SPACING_Y;
+        u32 posY = Draw_DrawString(10, 30, COLOR_WHITE, "Luma3DS (c) 2016-2025 AuroraWright, TuxSH") + SPACING_Y;
 
-        posY = Draw_DrawString(10, posY + SPACING_Y, COLOR_WHITE, "3DSX loading code by fincs");
-        posY = Draw_DrawString(10, posY + SPACING_Y, COLOR_WHITE, "Networking code & basic GDB functionality by Stary");
-        posY = Draw_DrawString(10, posY + SPACING_Y, COLOR_WHITE, "InputRedirection by Stary (PoC by ShinyQuagsire)");
+        posY = Draw_DrawString(10, posY + SPACING_Y, COLOR_WHITE, "3DSX loading code von fincs");
+        posY = Draw_DrawString(10, posY + SPACING_Y, COLOR_WHITE, "Networking code & basic GDB Funktionen von Stary");
+        posY = Draw_DrawString(10, posY + SPACING_Y, COLOR_WHITE, "InputRedirection von Stary (PoC von ShinyQuagsire)");
+        posY = Draw_DrawString(10, posY + SPACING_Y, COLOR_WHITE, "Deutsche Übersetzung von Nervi05");
 
         posY += 2 * SPACING_Y;
 
         Draw_DrawString(10, posY, COLOR_WHITE,
             (
-                "Special thanks to:\n"
+                "Besonderer Dank geht an:\n"
                 "  fincs, WinterMute, mtheall, piepie62,\n"
-                "  Luma3DS contributors, libctru contributors,\n"
-                "  other people"
+                "  Luma3DS Beiträger, libctru Beiträger,\n"
+                "  Andere Leute"
             ));
 
         Draw_FlushFramebuffer();
@@ -384,15 +385,15 @@ end:
         Draw_Lock();
         Draw_DrawString(10, 10, COLOR_TITLE, "Screenshot");
         if(R_FAILED(res))
-            Draw_DrawFormattedString(10, 30, COLOR_WHITE, "Operation failed (0x%08lx).", (u32)res);
+            Draw_DrawFormattedString(10, 30, COLOR_WHITE, "Vorgang fehlgeschlagen (0x%08lx).", (u32)res);
         else
         {
             u32 t1 = (u32)(1000 * timeSpentConvertingScreenshot / SYSCLOCK_ARM11);
             u32 t2 = (u32)(1000 * timeSpentWritingScreenshot / SYSCLOCK_ARM11);
             u32 posY = 30;
-            posY = Draw_DrawString(10, posY, COLOR_WHITE, "Operation succeeded.\n\n");
-            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Time spent converting:    %5lums\n", t1);
-            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Time spent writing files: %5lums\n", t2);
+            posY = Draw_DrawString(10, posY, COLOR_WHITE, "Vorgang erfolgreich.\n\n");
+            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Dauer, alles umzuwandeln:         %5lums\n", t1);
+            posY = Draw_DrawFormattedString(10, posY, COLOR_WHITE, "Dauer, um die Datei zu speichern: %5lums\n", t2);
         }
 
         Draw_FlushFramebuffer();
