@@ -1,4 +1,4 @@
-/*
+l/*
 *   This file is part of Luma3DS
 *   Copyright (C) 2016-2020 Aurora Wright, TuxSH
 *
@@ -222,8 +222,8 @@ static int ERRF_FormatError(char *out, const ERRF_FatalErrInfo *info, bool isLog
             break;
         case ERRF_ERRTYPE_FAILURE:
             out += ERRF_FormatGenericInfo(out, info);
-            out += sprintf(out, "Error code:       0x%08lx\n", info->resCode);
-            out += sprintf(out, "Reason:           %.96s\n", info->data.failure_mesg);
+            out += sprintf(out, "Fehler Code:       0x%08lx\n", info->resCode);
+            out += sprintf(out, "Grund:             %.96s\n", info->data.failure_mesg);
             break;
         default:
             out += sprintf(out, "Invalid fatal error data.\n");
